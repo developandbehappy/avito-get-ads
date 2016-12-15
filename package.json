@@ -1,0 +1,23 @@
+{
+  "name": "avito-get-ads",
+  "version": "1.0.0",
+  "description": "```sh $ npm i $ node getAds.js ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zidein07/avito-get-ads.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zidein07/avito-get-ads/issues"
+  },
+  "homepage": "https://github.com/zidein07/avito-get-ads#readme",
+  "dependencies": {
+    "nightmare": "^2.8.1",
+    "node-notify": "^1.0.0"
+  }
+}
