@@ -4,12 +4,14 @@ var _ = require('lodash');
 var nightmare = Nightmare({show: false});
 
 var currentLoad = 0;
-var countMatchedAds = 0;
+var latestMatchedItemTitle = '';
 var firstLoad = true;
 var latestAds = [];
-var wishPriceSearchAds = 10000;
+var wishPriceSearchAds = 1000;
+var urlAvitoPageWithAds = 'https://www.avito.ru/rostov-na-donu/';
 
-startSearchingAds('https://www.avito.ru/rostov-na-donu/noutbuki');
+
+startSearchingAds(urlAvitoPageWithAds);
 
 
 function startSearchingAds(url) {
@@ -64,27 +66,29 @@ function handlerHtmlAndReturnAds(id, limit) {
 
 
 function getNewAds() {
+  currentLoad = 0;
   if (firstLoad) {
     firstLoad = false;
   } else {
-    if (countMatchedAds !== _.size(getAdsByPrice(wishPriceSearchAds))) {
-      showMeNotify(getAdsByPrice(wishPriceSearchAds)[0]);
-      countMatchedAds = _.size(getAdsByPrice(wishPriceSearchAds));
+    var adsByPrice = getAdsByPrice(wishPriceSearchAds);
+    console.log('====================================');
+    console.log('title: ', latestMatchedItemTitle);
+    console.log('newlest title: ', _.first(adsByPrice).title);
+    console.log('====================================');
+    if (latestMatchedItemTitle !== _.first(adsByPrice).title) {
+      showMeNotify(_.first(adsByPrice));
+      latestMatchedItemTitle = _.first(adsByPrice).title;
     }
-    latestAds = _.uniqBy(latestAds, function (e) {
-      return e.title;
-    });
+    latestAds = [];
   }
-  console.log('====================================');
-  console.log('latestAds', getAdsByPrice(wishPriceSearchAds));
-  console.log('====================================');
+  // console.log('latestAds', adsByPrice);
   setTimeout(function () {
-    startSearchingAds('https://www.avito.ru/rostov-na-donu/noutbuki');
+    startSearchingAds(urlAvitoPageWithAds);
   }, 10000);
 }
 
 function getAdsByPrice(price) {
   return _.filter(latestAds, function (item) {
     return parseInt(item.price.replace(/\s+/g, '')) >= price;
-  })
+  });
 }
