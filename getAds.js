@@ -1,13 +1,13 @@
 var Nightmare = require('nightmare');
 var notifier = require('node-notifier');
 var _ = require('lodash');
-var nightmare = Nightmare({show: true});
+var nightmare = Nightmare({show: false});
 
 var currentLoad = 0;
 var latestMatchedItemTitle = '';
 var firstLoad = true;
 var latestAds = [];
-var wishPriceSearchAds = 30000;
+var wishPriceSearchAds = 10000;
 var urlAvitoPageWithAds = 'https://www.avito.ru/rostov-na-donu/noutbuki';
 
 
