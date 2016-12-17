@@ -7,7 +7,7 @@ var currentLoad = 0;
 var latestMatchedItemTitle = '';
 var firstLoad = true;
 var latestAds = [];
-var wishPriceSearchAds = 10000;
+var wishPriceSearchAds = 30000;
 var urlAvitoPageWithAds = 'https://www.avito.ru/rostov-na-donu/noutbuki';
 
 
